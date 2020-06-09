@@ -1,0 +1,29 @@
+version: "3.2"
+services:
+  node:
+    build: .
+    container_name: "node-vsc"
+    working_dir: /vsc/app
+    volumes:
+      - ./:/vsc/app
+    command: "npm run start"
+    tty: true
+    ports:
+      - "3030:3030"
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb-vsc"
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    ports:
+      - 27017:27017
+    command: mongod --logpath=/dev/null
+  redis:
+    image: redis
+    container_name: vsc-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./:/vsc/app
+    restart: always
