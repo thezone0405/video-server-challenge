@@ -6,7 +6,7 @@ import cookieSession from 'cookie-session'
 import cors from 'cors'
 import helmet from 'helmet'
 import express from 'express'
-import services from './services'
+import services from './routes'
 import config from '../config'
 
 const configuration = async ( req, res, next ) => {

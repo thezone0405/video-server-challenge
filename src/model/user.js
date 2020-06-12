@@ -1,7 +1,7 @@
 'use strict'
 import config from '../../config'
 import mongoose from 'mongoose'
-import {hash, isValidPassword} from 'utils/password'
+import {hash, isValidPassword} from '../utils/password'
 
 const {Schema} = mongoose
 
@@ -53,11 +53,10 @@ export class UserClass {
 
   static async login(username, password){
     const authenticated = await this.findOne({username, password: hash(password, PASSWORD_SALT )}).exec()
-
+    console.log(authenticated)
     if(!authenticated){
       throw new Error('incorrect_username_password')
     }
-    console.log(typeof this.Update)
     return authenticated
   }
 }

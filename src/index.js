@@ -1,8 +1,8 @@
 import app from './app'
 import config from '../config'
-//import {dbConnect} from 'utils/dbConnector'
+import {dbConnect} from './utils/dbConnector'
 
-//dbConnect( config, 0 )
+dbConnect( config, 0 )
 
 const serverUp = ( app ) => {
 	const server = app.listen( config.port )
