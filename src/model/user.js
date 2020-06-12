@@ -53,7 +53,6 @@ export class UserClass {
 
   static async login(username, password){
     const authenticated = await this.findOne({username, password: hash(password, PASSWORD_SALT )}).exec()
-    console.log(authenticated)
     if(!authenticated){
       throw new Error('incorrect_username_password')
     }
@@ -62,4 +61,5 @@ export class UserClass {
 }
 
 schema.loadClass( UserClass )
+export const castUserId = ( userId ) => mongoose.Types.ObjectId( userId )
 export const user = mongoose.model( 'Users', schema )
