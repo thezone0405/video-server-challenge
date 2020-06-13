@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export const createUser = async () => {
   const newUser = {
-    username: randomUsername(),
+    username: await randomUsername(),
     mobileToken: faker.random.alphaNumeric(),
     password: 'passw0rd'
   }

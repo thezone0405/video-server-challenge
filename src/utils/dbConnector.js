@@ -7,7 +7,7 @@ export const mongooseConnect = config.dbUri
 export const dbConnect = ( config, test = 1 ) => {
 	if ( config.dbType == 'noSQL' ) {
 		if ( mongoose.connection.readyState == 0 ) {
-			mongoose.connect( mongooseConnect, {useNewUrlParser: true}).then( client => {
+			mongoose.connect( mongooseConnect, {useNewUrlParser: true, useFindAndModify: false }).then( client => {
 				if ( !test ) {
 					console.log( 'Connected to database', 'noSQL' )
 				}

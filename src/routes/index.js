@@ -7,7 +7,7 @@ import express from 'express'
 
 const app = express()
 
-app.use('/account', account)
+app.use('/account', authorizer(['POST/']), account)
 app.use('/session', authorizer(['POST/']), session)
 
 export default app
