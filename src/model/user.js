@@ -58,6 +58,14 @@ export class UserClass {
     }
     return authenticated
   }
+
+  static async findByUsername(username){
+    const matchedUser = await this.findOne({username}).exec()
+    if(!matchedUser){
+      throw new Error('not_found')
+    }
+    return matchedUser
+  }
 }
 
 schema.loadClass( UserClass )

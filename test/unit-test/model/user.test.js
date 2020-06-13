@@ -123,5 +123,22 @@ describe("Login", () => {
   })
 })
 
+describe("Find by username", () => {
+  test("Returns credentials to logging in user", async () => {
+    const findOne = jest.fn()
+    findOne.mockReturnValueOnce(VERIFIED)
+    const result = await expect(
+      mock({
+        findOne
+      }).findByUsername(LOGIN.username)
+    ).resolves.toMatchObject(VERIFIED)
+
+    expect( findOne.mock.calls.length ).toBe( 1 )
+    expect( findOne.mock.calls[ 0 ].length ).toBe( 1 )
+    expect( findOne.mock.calls[ 0 ][ 0 ] ).toEqual({username: VERIFIED.username})
+    return result
+  })
+})
+
 
 
