@@ -1,4 +1,4 @@
-import {castUserId} from '../model/user'
+import {castObjectId} from '../model/user'
 import {decoder} from '../utils/jwt'
 import config from '../../config'
 

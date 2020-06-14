@@ -1,7 +1,7 @@
 'use strict'
 import express from 'express'
 import sanitize from 'mongo-sanitize'
-import {user, castUserId} from '../../model/user'
+import {user} from '../../model/user'
 
 const app = express.Router()
 

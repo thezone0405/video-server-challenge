@@ -1,7 +1,7 @@
 'use strict'
 import express from 'express'
 import sanitize from 'mongo-sanitize'
-import {user, castUserId} from '../../model/user'
+import {user, castObjectId} from '../../model/user'
 import {encoder} from '../../utils/jwt'
 import config from '../../../config'
 import {hash, isValidPassword} from '../../utils/password'
@@ -40,7 +40,7 @@ app.put('/', async (req, res) => {
     if(creds.password && creds.newPassword){
       const {password, newPassword} = creds
       result = await user.findOneAndUpdate({
-        _id: castUserId(_id), 
+        _id: castObjectId(_id), 
         password: hash(password, config.secret)
       }, Object.assign(creds, {password: hash(newPassword, config.secret)}), {new: true})
       if(!result){
@@ -52,7 +52,7 @@ app.put('/', async (req, res) => {
     }
     delete creds.password
     delete creds.isDeleted
-    result = await user.findOneAndUpdate({_id: castUserId(_id)}, creds, {new: true})
+    result = await user.findOneAndUpdate({_id: castObjectId(_id)}, creds, {new: true})
     response(200, result, res )
     return
   }catch(e){
@@ -65,7 +65,7 @@ app.put('/delete', async (req, res) => {
   try{
     const {_id} = req.session
     const result = await user.findOneAndUpdate({
-      _id: castUserId(_id), 
+      _id: castObjectId(_id), 
     }, {isDeleted: true}, {new: true})
     response(200, result, res )
   }catch(e){
@@ -77,7 +77,7 @@ app.put('/delete', async (req, res) => {
 app.delete('/',async (req, res) => {
   try{
     const {_id} = req.session
-    const result = await user.findOneAndRemove({_id: castUserId(_id)})
+    const result = await user.findOneAndRemove({_id: castObjectId(_id)})
     response(200, result, res )
   }catch(e){
     console.log(e)

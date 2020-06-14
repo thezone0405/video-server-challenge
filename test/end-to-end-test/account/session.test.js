@@ -4,7 +4,7 @@ import config from '../../../config'
 import {dbConnect} from 'utils/dbConnector'
 import {apiCall, host} from '../helper'
 import {createUser, login} from '../helper/user'
-import {castUserId} from 'model/user'
+import {castObjectId} from 'model/user'
 
 const decode = decoder({
 	secret: config.secret
@@ -25,7 +25,7 @@ describe("Session Creation", () => {
 
     expect( response.status ).toEqual( 200 )
     expect( response.data ).toBeTruthy()
-    expect( castUserId(decoded._id) ).toEqual( dummyUser._id )
+    expect( castObjectId(decoded._id) ).toEqual( dummyUser._id )
   })
 
   test("Rejects login for invalid credentials", async () =>{

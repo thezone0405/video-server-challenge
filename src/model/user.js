@@ -27,7 +27,11 @@ const schema = new Schema({
   isDeleted: {
     type: Boolean,
     default: false
-  }
+  },
+  rooms: [{
+		type: Schema.ObjectId,
+		ref : 'Users'
+	}]
 })
 
 export class UserClass {
@@ -69,5 +73,6 @@ export class UserClass {
 }
 
 schema.loadClass( UserClass )
-export const castUserId = ( userId ) => mongoose.Types.ObjectId( userId )
+export const castObjectId = ( userId ) => mongoose.Types.ObjectId( userId )
+export const validateObjectId = (id) => mongoose.Types.ObjectId.isValid(id)
 export const user = mongoose.model( 'Users', schema )

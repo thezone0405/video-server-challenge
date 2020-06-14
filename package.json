@@ -8,6 +8,7 @@
   },
   "scripts": {
     "unit-test": "jest test/unit-test --watch",
+    "e2e-test": "jest test/end-to-end-test --watch",
     "start": "nodemon --exec babel-node src/index.js",
     "start:prod": "node ./build/index.js"
   },

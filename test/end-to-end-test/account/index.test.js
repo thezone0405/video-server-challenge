@@ -2,7 +2,7 @@ import config from '../../../config'
 import {dbConnect} from 'utils/dbConnector'
 import {apiCall, host, randomUsername} from '../helper'
 import {login, createUser} from '../helper/user'
-import {castUserId, user} from 'model/user'
+import {castObjectId, user} from 'model/user'
 import {decoder} from 'utils/jwt'
 import {PASSWORD_SALT} from 'model/user'
 import {hash} from 'utils/password'
@@ -28,7 +28,7 @@ describe("Registration", () => {
     const decoded = decode(response.data.token)
     expect( response.status ).toEqual( 200 )
     expect( response.data ).toBeTruthy()
-    expect( castUserId(decoded._id) ).toBeTruthy()
+    expect( castObjectId(decoded._id) ).toBeTruthy()
   })
 
   test("Rejects registration for duplicate username", async () => {
