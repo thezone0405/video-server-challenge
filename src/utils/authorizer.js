@@ -3,6 +3,7 @@ import {decoder} from '../utils/jwt'
 import config from '../../config'
 
 export const authorizer = ( exception = []) => ( async (req, res, next) => {
+  console.log("THE PATH",req.method+req.path)
   if(exception.includes(req.method+req.path)){
     next()
     return

@@ -22,6 +22,16 @@ app.get('/user/:username', async (req, res) => {
   response(200, matchedUser.rooms , res)
 })
 
+app.get('/:id', async (req, res) => {
+  const {id} = req.params
+  if(!validateObjectId(id)){
+    response(404, {error: 'not_found'}, res)
+    return
+  }
+  const result = await conferenceRoom.findOne({_id: id})
+  response(200, result , res)
+})
+
 app.post('/', async (req, res) => {
   const {_id} = req.session
   const {name, capacity } = sanitize(req.body)
