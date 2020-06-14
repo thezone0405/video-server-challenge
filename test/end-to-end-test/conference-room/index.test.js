@@ -2,7 +2,6 @@ import config from '../../../config'
 import {dbConnect} from 'utils/dbConnector'
 import {apiCall, host, randomUsername} from '../helper'
 import {login, createUser} from '../helper/user'
-import {castObjectId, user} from 'model/user'
 import {createRoom, createRoomWithParticipants} from '../helper/room'
 
 let dummyUser, dummyUser2, dummyUser3, dummyUser4, room, roomWithParticipants

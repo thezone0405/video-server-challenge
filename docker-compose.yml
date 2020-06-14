@@ -19,11 +19,3 @@ services:
     ports:
       - 27017:27017
     command: mongod --logpath=/dev/null
-  redis:
-    image: redis
-    container_name: vsc-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./:/vsc/app
-    restart: always

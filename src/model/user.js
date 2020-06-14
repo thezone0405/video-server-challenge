@@ -30,7 +30,7 @@ const schema = new Schema({
   },
   rooms: [{
 		type: Schema.ObjectId,
-		ref : 'Users'
+		ref : 'ConferenceRooms'
 	}]
 })
 
