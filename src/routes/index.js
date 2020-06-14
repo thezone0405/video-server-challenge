@@ -14,7 +14,7 @@ app.use('/account', authorizer(['POST/']), account)
 app.use('/session', authorizer(['POST/']), session)
 app.use('/user', user)
 
-app.use('/room', authorizer(), conferenceRoom)
+app.use('/room', authorizer(['GET/user']), conferenceRoom)
 app.use('/conference', authorizer(), conference)
 
 export default app

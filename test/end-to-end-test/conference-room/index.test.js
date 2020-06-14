@@ -112,3 +112,15 @@ describe("Update room", () => {
     }
   })
 })
+
+describe("Search users rooms", () => {
+  test("Returns a list of rooms a user is in", async () => {
+    const response = await apiCall(`${host}/room/user/${dummyUser2.username}`)
+
+    console.log(response.data)
+
+    expect( response.status ).toEqual( 200 )
+    expect( response.data ).toBeTruthy()
+    expect( response.data.length ).toBeGreaterThanOrEqual(1)
+  })
+})

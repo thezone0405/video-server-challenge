@@ -1,9 +1,9 @@
 import express from 'express'
 import sanitize from 'mongo-sanitize'
-import {castObjectId, validateObjectId} from '../../model/user'
+import {castObjectId, validateObjectId, user} from '../../model/user'
 import {conferenceRoom} from '../../model/conferenceRoom'
 import config from '../../../config'
-import {user} from '../account/user'
+//import {user} from '../account/user'
 
 const app = express.Router()
 
@@ -11,6 +11,16 @@ const response = ( status, data, res ) => {
 	res.status( status )
 	res.send( JSON.stringify( data ) ) 
 }
+
+app.get('/user/:username', async (req, res) => {
+  const {username} = req.params
+  const matchedUser = await user.findOne({username}).populate('rooms')
+  if(!matchedUser){
+    response(404, {error: 'not_found'}, res)
+    return
+  }
+  response(200, matchedUser.rooms , res)
+})
 
 app.post('/', async (req, res) => {
   const {_id} = req.session
@@ -22,6 +32,7 @@ app.post('/', async (req, res) => {
       name,
       participants: [castObjectId(_id)]
     })
+    await user.findOneAndUpdate({_id}, { $push: { rooms: result._id }})
     response(200, result, res)
   }catch(e){
     console.log(e)
